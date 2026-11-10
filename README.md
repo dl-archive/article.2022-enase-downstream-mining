@@ -4,7 +4,7 @@
 
 *Proceedings of the 17th International Conference on Evaluation of Novel Approaches to Software Engineering - ENASE (ENASE '22)*, April 25–26, 2022, online. SciTePress, pp. 221–232.
 
-DOI: [10.5220/0011093700003176](https://doi.org/10.5220/0011093700003176) · Author's version: Zenodo *(pending)* · [ResearchGate](https://www.researchgate.net/publication/360231022)
+DOI: [10.5220/0011093700003176](https://doi.org/10.5220/0011093700003176) · Author's version: [Zenodo](https://doi.org/10.5281/zenodo.24121768) · [ResearchGate](https://www.researchgate.net/publication/360231022)
 
 Tool and project: [LinqLover/downstream-repository-mining](https://github.com/LinqLover/downstream-repository-mining) ([Zenodo](https://doi.org/10.5281/zenodo.6338060)).
 
