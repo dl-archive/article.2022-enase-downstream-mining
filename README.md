@@ -36,12 +36,25 @@ Tool and project: [LinqLover/downstream-repository-mining](https://github.com/Li
 
 The SciTePress template files (`article.cls`, `SCITEPRESS.sty`, `apalike.sty`, `apalike.bst`) are bundled in `src/` and take precedence over the TeX Live versions.
 `thiede2022-downstream-mining-as-submitted.pdf` was built with TeX Live 2021 (pdfTeX 1.40.23), hence the TeX Live 2021 container; the build reproduces it (identical text and layout).
+On `main`, the build produces the revised version (`v1.1-revised`). Check out `v1.0-camera-ready` to reproduce `thiede2022-downstream-mining-as-submitted.pdf`.
+The build compiles a scratch copy of `src/` inside the container, so the ORCID logo (`orcid.eps`, used from `v1.1-revised` on) can be converted to PDF.
 
 The only source change against the project repository: the path of `measurements/fpr.csv` (the original pointed to the copy in `docs/ENASE2022/manuscript/`, which only resolves when compiling from the repository root).
 
 ## Versions
 
 - [`v1.0-camera-ready`](https://github.com/dl-archive/article.2022-enase-downstream-mining/tree/v1.0-camera-ready) – sources of the author's version (camera-ready plus the SciTePress author-version notice on the first page)
+- [`v1.1-revised`](https://github.com/dl-archive/article.2022-enase-downstream-mining/tree/v1.1-revised) – author's revised version (2026-11-11): ORCID iDs, grammar and typo fixes, see [Revisions](#revisions)
+
+## Revisions
+
+`v1.1-revised` (2026-11-11) corrects errors in the author's version without changing its content or layout.
+Every page carries the note "Author's revised version (2026-11-11). Version of record: https://doi.org/10.5220/0011093700003176".
+
+- ORCID iDs of all authors as linked icons next to their names (footnotes would reflow the first page).
+- Typos and leftover fragments: "redesign" (abstract, was "resdesign"), "navigable", a stray "or TypeScript" in the caption of Figure 2 (c), and the colon after "answering the developers' questions." that led into the next paragraph.
+- Parentheses: closed "(for instance, … comments)", opened "(e.g., potentially indicating …)", closed "(e.g., potentially revealing bugs …)".
+- Grammar and word choice: "in their development environment", "false positives", "runtime", "metaprogramming", "such a framework that", "requirement for frequent tasks" (2×), "does not conform to", "allows exploring", "counteract it", "than for those found on npm", "is a target for future work", "slower on average", "for which" (2×).
 
 ## Citation
 

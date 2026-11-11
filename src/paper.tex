@@ -269,11 +269,14 @@
 \crefname{requirement}{requirement}{requirements}
 \crefname{question}{question}{questions}
 
+\usepackage{eso-pic}
+\AddToShipoutPictureFG{\AtPageLowerLeft{\put(\LenToUnit{0.5\paperwidth},\LenToUnit{6mm}){\makebox[0pt][c]{\fontsize{6.5}{8}\selectfont\color{gray}Author's revised version (2026-11-11). Version of record: https://doi.org/10.5220/0011093700003176}}}}
+
 \begin{document}
 
 \title{Augmenting Library Development by Mining Usage Data from~Downstream~Dependencies}
 
-\author{\authorname{Christoph Thiede, Willy Scheibel, Daniel Limberger, and J{\"u}rgen D{\"o}llner}
+\author{\authorname{Christoph Thiede\,\href{https://orcid.org/0000-0002-7442-8216}{\raisebox{-0.15ex}{\epsfig{file=orcid.eps,width=0.25cm}}}, Willy Scheibel\,\href{https://orcid.org/0000-0002-7885-9857}{\raisebox{-0.15ex}{\epsfig{file=orcid.eps,width=0.25cm}}}, Daniel Limberger\,\href{https://orcid.org/0000-0002-9111-4809}{\raisebox{-0.15ex}{\epsfig{file=orcid.eps,width=0.25cm}}}, and J{\"u}rgen D{\"o}llner\,\href{https://orcid.org/0000-0002-8981-8583}{\raisebox{-0.15ex}{\epsfig{file=orcid.eps,width=0.25cm}}}}
 \affiliation{Hasso Plattner Institute, Digital Engineering Faculty, University of Potsdam}
 }
 
@@ -295,7 +298,7 @@
     and process about 12 dependencies per minute. %
     The usage sample extraction offers high precision for basic use cases.
     The main limitations are the exclusion of unpopular and closed-source downstream dependencies as well as failing analysis when encountering complex build configurations or metaprogramming patterns.
-    To summarize, we show that the tool supports package developers in gathering usage data and surveying the use of their packages and APIs within their downstream dependencies, allowing for informed decision-making and improving the resdesign of APIs. 
+    To summarize, we show that the tool supports package developers in gathering usage data and surveying the use of their packages and APIs within their downstream dependencies, allowing for informed decision-making and improving the redesign of APIs. 
 }
 
 \onecolumn \maketitle \normalsize \setcounter{footnote}{0} \vfill
@@ -322,7 +325,7 @@ Our approach consists of three steps:
 \begin{enumerate*}[label=(\roman*)]
 	\item collect downstream dependency repositories from public source code repositories,
 	\item mine package usage samples from these dependencies using a type analyzer,
-	and \item aggregate and present these usage data to the package developer in its development environment.
+	and \item aggregate and present these usage data to the package developer in their development environment.
 \end{enumerate*}
 The approach is implemented as a Visual Studio Code extension\footnote{All presented artifacts are available on GitHub: \href{https://github.com/LinqLover/downstream-repository-mining}{https://github.com/LinqLover/downstream-repository-mining}~\cite{thiede2022dowdep}} and evaluated on a selection of open source projects and specific development-centric questions.
 
@@ -354,7 +357,7 @@ Liu et al. provide a survey of methods and trends in code search tools that incl
 \label{sec:related_work/usage_samples}
 Dependency graphs do not provide information about package usage at sufficient granularity. For example, insights about referencing package classes or methods are missing.
 The process of extracting fine-grained information about all references to individual elements of an interface is referred to as \emph{API usage analysis}~\cite{lammel2011large}.
-A simple approach is to perform a string search for package names or members in the dependencies~\cite{mileva2010mining}, or to operate on the \emph{abstract syntax tree} (AST) of each parsed dependency to avoid false positive caused by ambivalent identifier names~\cite{qiu2016understanding}.
+A simple approach is to perform a string search for package names or members in the dependencies~\cite{mileva2010mining}, or to operate on the \emph{abstract syntax tree} (AST) of each parsed dependency to avoid false positives caused by ambivalent identifier names~\cite{qiu2016understanding}.
 In addition, one can collect usage data to analyze the historical importance of certain features supported by an API~\cite{sawant2017fine}.
 
 However, the precision of ASTs is limited for \emph{dynamically typed} languages such as JavaScript or Python.
@@ -362,12 +365,12 @@ As opposed to static typing, the value type of an expression in a dynamically ty
 For this reason, a \emph{type analysis} can help to predict runtime types of all expressions in the AST~\cite{jensen2009type}.
 This is usually accomplished by analyzing the control flow of a program and inferring possible types of every variable or function.
 Another source for enhancing type information is \emph{call graphs} that are either gathered \emph{statically}, i.e., as a result of a theoretical analysis of the source code, or \emph{dynamically}, i.e., sampled during actual program execution.
-While the latter method is better suited to include more contextual information, the former method has the advantage that it can be applied to a more considerable amount of source code without requiring concrete entry points, parameterization, and run-time data.
+While the latter method is better suited to include more contextual information, the former method has the advantage that it can be applied to a more considerable amount of source code without requiring concrete entry points, parameterization, and runtime data.
 Many solutions exist that analyze the structure of programs and extract relevant information to build call graphs:
 
 Collard et al. propose an infrastructure called \caps{srcML} that aims to create a unified representation of multilingual source code snippets for arbitrary analysis purposes, including the construction of call graphs~\cite{collard2013srcml}.
 Another solution utilizes an island parser to build polyglot call graphs~\cite{bogar2018lightweight}.
-Furthermore, Antal et al. compare several call graph generators for JavaScript and emphasize that static call graph generators have limited precision by design for languages supporting dynamic typing or meta-programming mechanisms~\cite{antal2018static}.
+Furthermore, Antal et al. compare several call graph generators for JavaScript and emphasize that static call graph generators have limited precision by design for languages supporting dynamic typing or metaprogramming mechanisms~\cite{antal2018static}.
 
 To merge dependency graphs and call graphs, ecosystem call graphs can be constructed by applying call graphs to entire ecosystems that cross repository boundaries.
 Many approaches apply this concept to different ecosystems, often aiming to conduct fine-grained impact analysis for security vulnerabilities~\cite{hejderup2018software,boldi2020fine,wang2020empirical,hejderup2021praezi,keshani2021scalable,nielsen2021modular}.
@@ -375,14 +378,14 @@ Another approach is the \emph{precise code intelligence} feature of Sourcegraph,
 
 After collecting these usage data, additional processing is possible to extract general usage information from the extensive raw data.
 Next to basic grouping and counting operations, such aggregations can be built by detecting popular \emph{usage patterns} of API features in the downstream dependencies.
-Zhong et al. propose such a framework, that, for instance, finds sequences of API members that are invoked frequently and even uses these patterns for guiding API users by giving them recommendations~\cite{zhong2009mapo}.
+Zhong et al. propose such a framework that, for instance, finds sequences of API members that are invoked frequently and even uses these patterns for guiding API users by giving them recommendations~\cite{zhong2009mapo}.
 Hanam et al. pursue a different goal in their tool that helps package developers assess the impact of breaking API changes on the functionality of downstream dependencies~\cite{hanam2019aiding}.
 
 \paragraph{Presentation of results.}
 \label{sec:related_work/presentation}
 
 To establish an adequate developer experience, any collected usage data still need to be presented suitably.
-Due to the hierarchical structure of source code, a common approach for this is a hierarchical and navigatable representation of the collected call tree.
+Due to the hierarchical structure of source code, a common approach for this is a hierarchical and navigable representation of the collected call tree.
 An early form of this representation has been invented as the interactive \enquote{message set} tool for browsing senders and implementors in an object-oriented system for the Smalltalk programming environment \cite{goldberg1984smalltalk}.
 Modern alternatives include the \emph{Stacksplorer} \cite{karrer2011stacksplorer} or \emph{Blaze} \cite{kramer2012blaze} that list next to the currently focused method other methods which are adjacent to this method in the call graph.
 With a focus on exploring references to API members, De Roover et al. propose a set of additional views, including hierarchical lists and word clouds for highly referenced identifiers \cite{de2013multi}.
@@ -390,7 +393,7 @@ Focusing on exploring APIs in a non-code-centric way, Hora and Valente propose a
 
 \section{Downstream Dependency Mining}
 \label{sec:approach}
-Our approach to improve developers' knowledge about the usage of their packages is based on the automatic gathering of downstream dependency information and integration into their development environment. This approach assumes a target package and focuses on showing a developer actual usage of parts of their package and, in particular, answering the following questions:
+Our approach to improve developers' knowledge about the usage of their packages is based on the automatic gathering of downstream dependency information and integration into their development environment. This approach assumes a target package and focuses on showing a developer actual usage of parts of their package and, in particular, answering the developers' questions.
 In doing so, we identified three questions from package developers about the usage of their packages:
 \begin{enumerate}[label=Q\arabic*]
 	\item \label[question]{q1} Which dependencies are using the target package, and what problems do they try to solve with them?
@@ -400,7 +403,7 @@ In doing so, we identified three questions from package developers about the usa
 For an effective integration into the development process, we pose three non-functional requirements:
 \begin{enumerate}[label=R\arabic*]
 	\item \label[requirement]{req1} The tool is ready to use out of the box and requires little configuration (less than 5 minutes for a new user).
-	\item \label[requirement]{req2} The tool consumes sufficiently few computational resources to run on a single machine but still delivers interactive response times according to Shneiderman's requirement to frequent tasks~\cite{shneiderman2010designing}.
+	\item \label[requirement]{req2} The tool consumes sufficiently few computational resources to run on a single machine but still delivers interactive response times according to Shneiderman's requirement for frequent tasks~\cite{shneiderman2010designing}.
 	\item \label[requirement]{req3} The tool blends in with the usual workflow of package developers at the best possible rate.
 \end{enumerate}
 On a conceptual level, we separate the approach into the collection of downstream dependency projects and mining of usage samples based on a target package.
@@ -434,7 +437,7 @@ On a conceptual level, we separate the approach into the collection of downstrea
 In the first step, a list of repositories that depend on the target package has to be assembled.
 As mentioned in \cref{sec:related_work/usage_samples}, many approaches start with a large downloaded corpus of unspecific repositories from the ecosystem, which they then iterate over to filter the relevant repositories.
 However, a major drawback of this approach is the high resource demand for both creating and traversing this corpus.
-This approach is suited for analyzing repositories on a large scale but is not conform to \cref{req1} because of its large footprint in terms of computational power, memory, and time.
+This approach is suited for analyzing repositories on a large scale but does not conform to \cref{req1} because of its large footprint in terms of computational power, memory, and time.
 As an alternative, we have decided to apply filtering to the set of repositories before downloading a subset of it to the developers' machine.
 For that, we use two types of data sources that are available as public web platforms:
 
@@ -506,7 +509,7 @@ In particular, each of these patterns expects a node containing a link to an ide
                 \end{tikzpicture}
                 \caption[LoF entry]{
                 	Node pattern for a JSX opening element (as supported in React or TypeScript), such as in: %
-                	or TypeScript%
+                	
                 	
                 	\mycode*{\textlowlight{elem = }\uline{<\texthighlight{Button} \textlowlight{color}="\textlowlight{blue}"> \textlowlight{Submit</Button>}}\textlowlight{;}}
                 }
@@ -607,13 +610,13 @@ To support other researchers in reusing our solution, we also provide a CLI.
 The user interface is divided into three key views, supporting developers in answering the questions raised in \cref{sec:approach} (see \cref{fig:implementation/presentation/screenshots}):
 
 \begin{enumerate}[label=(\roman*)]
-	\item The \emph{dependency browser} allows to explore all downstream dependencies and, grouped for each dependency, all references to the target package.
+	\item The \emph{dependency browser} allows exploring all downstream dependencies and, grouped for each dependency, all references to the target package.
 	\item The \emph{usage browser} displays all public package members and, grouped for each member, all dependencies and their references to this member.
 	\item The \emph{CodeLens integration} provides quick access to a slice of usage samples and is attached to the definition of each package member in the source code editor.
 \end{enumerate}
 
 Both references and members are organized each in a tree view that reflects the hierarchical structure of the original software repository.
-In addition, we recognize the effort of browsing large lists of dependency data and encounter it by providing an \enquote{I'm feeling lucky} button for every view that redirects the user to a random dependency or reference, respectively, to gain a faster, unbiased impression of usage samples.
+In addition, we recognize the effort of browsing large lists of dependency data and counteract it by providing an \enquote{I'm feeling lucky} button for every view that redirects the user to a random dependency or reference, respectively, to gain a faster, unbiased impression of usage samples.
 
 To implement each of these views in the VS Code Extension API (VSCE)\footnote{\url{https://code.visualstudio.com/api}}, we use the \emph{Tree View API} and the \emph{CodeLens API}.
 One challenge has been to deliver fast results and not to block the user interface because even despite the lightweight mining methods we chose to satisfy \cref{req2} from above, querying, downloading, and analyzing each dependency takes a few seconds (see \cref{sec:evaluation}).
@@ -695,7 +698,7 @@ As the disjunct proportion of results from both methods is very small (on averag
 \paragraph{Precision.}
 \label{sec:evaluation/resqu1/precision}
 
-The precision of collected dependencies is drastically lower for dependencies found on Sourcegraph than for such found on npm.
+The precision of collected dependencies is drastically lower for dependencies found on Sourcegraph than for those found on npm.
 \Cref{fig:evaluation/resqu1/fp_causes} collates the causes we have identified for false positives; most frequently, repositories specify a dependency on a target package in their package manifest file but do not import this package at any place.
 \begin{figure*}[t]
 	\centering
@@ -775,7 +778,7 @@ usage sample can be easily filtered out, but downloading and analyzing any irrel
 \label{sec:evaluation/resqu1/recall}
 
 Besides the precision of the collected dependencies, their recall is of interest, too.
-Since dependencies are collected in excerpts from two large datasets, a quantitative analysis of false negatives would require costly manual annotation and is target for future work.
+Since dependencies are collected in excerpts from two large datasets, a quantitative analysis of false negatives would require costly manual annotation and is a target for future work.
 Nevertheless, some causes will prevent a dependency from being found by our methods:
 
 \begin{table*}
@@ -819,7 +822,7 @@ Nevertheless, some causes will prevent a dependency from being found by our meth
 \paragraph{Performance.}
 \label{sec:evaluation/resqu1/performance}
 \Cref{tab:evaluation/resqu1/performance} gives some basic metrics comparing the performance of both data sources. 
-While searching downstream dependencies is slower by average on npm as we use a web scraper instead of an API for this source, npm packages are usually smaller than many mono-repositories on OSS platforms that contain multiple node.js packages. 
+While searching downstream dependencies is slower on average on npm as we use a web scraper instead of an API for this source, npm packages are usually smaller than many mono-repositories on OSS platforms that contain multiple node.js packages. 
 In addition, they are faster to download since the \texttt{download-git-repo} package that we use for repositories found on Sourcegraph only uses zipballs instead of tarballs (\texttt{.tar.gz} files), while the latter would offer a higher compression rate.
 
 \subsection{\ref{resqu2}: Usage mining}
@@ -834,20 +837,20 @@ There are only two theoretical exceptions to this invariant:
 	\item In case of a name collision between two packages, invalid or false positive usage samples may be emitted.
         However, the npm infrastructure attempts to rule out these collisions by using the package name as a unique ID for every published package.
 	\item If dependency developers deliberately interfere with the TypeScript compiler (for instance, 
-	    by suppressing type errors using \texttt{@ts-ignore} comments%
+	    by suppressing type errors using \texttt{@ts-ignore} comments)%
 	    , both false positive and false negative matches are possible.
 \end{enumerate*}
 Additionally, some npm packages contain minified sources only that are still searchable, valid code but can be significantly harder to read.
 
 \paragraph{Recall.}
 To evaluate the recall of our method, we have refined the experimental dataset collected in \cref{sec:evaluation/resqu1} and removed all false-positive dependencies.
-Within this cleansed dataset, the overall rate of dependencies for that our method cannot find at least one usage sample accounts for \SI{47.9}{\percent}.
+Within this cleansed dataset, the overall rate of dependencies for which our method cannot find at least one usage sample accounts for \SI{47.9}{\percent}.
 To explain these false negatives, we have identified some systematic causes:
 \begin{itemize}
 	\item Many projects on OSS platforms have complex build configurations that include additional transpilation or code generation steps before a final version of the source code is reached that is valid to the node.js interpreter or the TypeScript compiler.
 		Unless we add explicit support for such build configurations, type analysis and usage mining for these projects will fail.
 	\item In some situations, additional type definitions are required to perform a complete type inference of a dependency.
-		This applies to every parametrized callback from a package for that type definitions are not available.
+		This applies to every parametrized callback from a package for which type definitions are not available.
 		This limitation could be resolved by downloading or generating type definitions for all upstream dependencies of every downstream dependency; however, this would reduce the approach's performance.
 	\item The static type analyzer of TypeScript has some limitations.
 		For instance, the type analysis will have a limited recall for certain control flow patterns or metaprogramming constructs such as meta-circular evaluation using the \texttt{eval()} function or dynamic function binding using \texttt{Function.bind()}.
@@ -889,7 +892,7 @@ Even if the tool downloads a few hundred dependencies, it will occupy less than 
 
 \Cref{req3} effectively calls for a minimum number of context switches that are required to use the tool, i.e., for minimizing the temporal, spatial, and semantic distance~\cite{ungar1997debugging} between the downstream dependency UI and the IDE used by package developers. 
 Once the data are available in the UI, interaction is possible with the same speed as with local source files in the package.
-This meets Shneiderman's requirement to frequent tasks and indicates a low temporal distance.
+This meets Shneiderman's requirement for frequent tasks and indicates a low temporal distance.
 The spatial distance varies for the different views of the tool:
 A separate toolbar has to be opened for the dependency and usage browsers, which indicates a higher spatial distance; still, the artifacts are available in the same IDE.
 Also, the dependency artifacts have no strong relation to any existing IDE artifacts, so any closer integration into an existing view would increase coupling between independent domains.
@@ -918,7 +921,7 @@ We believe that our tool has further potential to support package developers in 
 As future work, we envision other purposes for analyzing the collected downstream dependency data, including usage pattern mining, automated convenience protocol suggestions, and the generation of metrics for classifying downstream dependencies or measuring the cohesion and impact of libraries within an ecosystem.
 By extending the static usage analysis with a dynamic approach, the detected usage samples could be enriched with valuable runtime data describing involved parameters, the fine-grained code coverage of package members, or the invocation context of members.
 Returning to the abstract problem that we have formulated in the introduction -- how can we improve developer knowledge about their packages' usage? --, further data sources next to source code files emerge that could be mined for package references, too.
-For instance, we are looking forward to solutions that mine the change history of projects for package-related changes (potentially indicating breaking changes), search conversation platforms such as public issue trackers or Q\&A forums for mentions of package members and analyze their sentiments, e.g., potentially indicating confusing behavior or bad documentation), or even scan continuous integration logs for failure stack traces (e.g., potentially revealing bugs in the package of interest.
+For instance, we are looking forward to solutions that mine the change history of projects for package-related changes (potentially indicating breaking changes), search conversation platforms such as public issue trackers or Q\&A forums for mentions of package members and analyze their sentiments (e.g., potentially indicating confusing behavior or bad documentation), or even scan continuous integration logs for failure stack traces (e.g., potentially revealing bugs in the package of interest).
 
 \section*{\uppercase{Acknowledgements}}
 
